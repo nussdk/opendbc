@@ -1482,6 +1482,17 @@
     ],
     "package": "Smart Cruise Control (SCC)"
   },
+    "Kia Carnival HEV 2025-2026": {
+    "platform": "KIA_CARNIVAL_HEV_4TH_GEN",
+    "make": "Kia",
+    "brand": "hyundai",
+    "model": "Carnival",
+    "year": [
+      "2025",
+      "2026"
+    ],
+    "package": "Smart Cruise Control (SCC)"
+  },
   "Kia Ceed 2019-21": {
     "platform": "KIA_CEED",
     "make": "Kia",
