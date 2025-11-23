@@ -8,6 +8,7 @@ from opendbc.car.hyundai.values import CAR as HYUNDAI
 from opendbc.car.nissan.values import CAR as NISSAN
 from opendbc.car.mazda.values import CAR as MAZDA
 from opendbc.car.mock.values import CAR as MOCK
+from opendbc.car.rivian.values import CAR as RIVIAN
 from opendbc.car.subaru.values import CAR as SUBARU
 from opendbc.car.tesla.values import CAR as TESLA
 from opendbc.car.toyota.values import CAR as TOYOTA
@@ -28,6 +29,7 @@ non_tested_cars = [
   SUBARU.SUBARU_FORESTER_HYBRID,
   TESLA.TESLA_MODEL_3,
   TESLA.TESLA_MODEL_Y,
+  RIVIAN.RIVIAN_R1_GEN1,
 ]
 
 
@@ -124,6 +126,7 @@ routes = [
   CarTestRoute("656ac0d830792fcc|2021-12-28--14-45-56", HYUNDAI.HYUNDAI_SANTA_FE_PHEV_2022, segment=1),
   CarTestRoute("de59124955b921d8|2023-06-24--00-12-50", HYUNDAI.KIA_CARNIVAL_4TH_GEN),
   CarTestRoute("409c9409979a8abc|2023-07-11--09-06-44", HYUNDAI.KIA_CARNIVAL_4TH_GEN),  # Chinese model
+  CarTestRoute("f1a99071580b5733/00000007--260128fdab", HYUNDAI.KIA_CARNIVAL_2025),  # HDA 2
   CarTestRoute("6c0069dcd5bbb6c1/00000020--6b95507969", HYUNDAI.KIA_CARNIVAL_HEV_4TH_GEN),  # HDA2
   CarTestRoute("e0e98335f3ebc58f|2021-03-07--16-38-29", HYUNDAI.KIA_CEED),
   CarTestRoute("7653b2bce7bcfdaa|2020-03-04--15-34-32", HYUNDAI.KIA_OPTIMA_G4),

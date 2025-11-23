@@ -54,6 +54,17 @@ class CarControllerParams:
       self.STEER_DELTA_DOWN = 4
       self.STEER_DELTA_DOWN = 6
 
+class HyundaiSafetyFlags(IntFlag):
+  FLAG_HYUNDAI_EV_GAS = 1
+  FLAG_HYUNDAI_HYBRID_GAS = 2
+  FLAG_HYUNDAI_LONG = 4
+  FLAG_HYUNDAI_CAMERA_SCC = 8
+  FLAG_HYUNDAI_CANFD_HDA2 = 16
+  FLAG_HYUNDAI_CANFD_ALT_BUTTONS = 32
+  FLAG_HYUNDAI_ALT_LIMITS = 64
+  FLAG_HYUNDAI_CANFD_HDA2_ALT_STEERING = 128
+
+
 class HyundaiFlags(IntFlag):
   # Dynamic Flags
   CANFD_HDA2 = 2 ** 0
@@ -511,7 +522,7 @@ class CAR(Platforms):
       HyundaiCarDocs("Kia Carnival (with HDA II) 2025", "Highway Driving Assist II", car_parts=CarParts.common([CarHarness.hyundai_q])),
     ],
     CarSpecs(mass=2087, wheelbase=3.09, steerRatio=14.23),
-    flags=HyundaiFlags.ICE | HyundaiFlags.CCNC,
+    flags=HyundaiFlags.RADAR_SCC,
   )
   KIA_CARNIVAL_HEV_4TH_GEN = HyundaiCanFDPlatformConfig(
     [
@@ -520,6 +531,14 @@ class CAR(Platforms):
     ],
     CarSpecs(mass=2253, wheelbase=3.09, steerRatio=14.23),
     flags=HyundaiFlags.CCNC,
+  )
+  KIA_CARNIVAL_2025 = HyundaiCanFDPlatformConfig(
+    [
+      HyundaiCarDocs("Kia Carnival 2025", car_parts=CarParts.common([CarHarness.hyundai_k])),
+      HyundaiCarDocs("Kia Carnival (with HDA II) 2025", "Highway Driving Assist II", car_parts=CarParts.common([CarHarness.hyundai_q])),
+    ],
+    CarSpecs(mass=2087, wheelbase=3.09, steerRatio=14.23),
+    flags=HyundaiFlags.ICE | HyundaiFlags.CCNC,
   )
 
   # Genesis
