@@ -81,9 +81,6 @@ class HyundaiFlags(IntFlag):
 
   # Static flags
 
-  # Some ICE have corrupt HYBRID messages and need this to override false detection as HYBRID.
-  ICE = 2 ** 24
-
   # If 0x500 is present on bus 1 it probably has a Mando radar outputting radar points.
   # If no points are outputted by default it might be possible to turn it on using  selfdrive/debug/hyundai_enable_radar_points.py
   MANDO_RADAR = 2 ** 12
@@ -526,7 +523,7 @@ class CAR(Platforms):
       HyundaiCarDocs("Kia Carnival (with HDA II) 2025", "Highway Driving Assist II", car_parts=CarParts.common([CarHarness.hyundai_q])),
     ],
     CarSpecs(mass=2087, wheelbase=3.09, steerRatio=14.23),
-    flags=HyundaiFlags.ICE | HyundaiFlags.CCNC,
+    flags= HyundaiFlags.CCNC,
   )
 
   # Genesis

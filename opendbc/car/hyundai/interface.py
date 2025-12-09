@@ -30,7 +30,8 @@ class CarInterface(CarInterfaceBase):
       # TODO: Fix this. Currently not working with ADAS disabled.
       ret.enableBsm = False
 
-      if 0x105 in fingerprint[CAN.ECAN] and not ret.flags & HyundaiFlags.ICE:
+      # Check if the car is hybrid. Only HEV/PHEV cars have 0xFA on E-CAN.
+      if 0xFA in fingerprint[CAN.ECAN]:
         ret.flags |= HyundaiFlags.HYBRID.value
 
       # detect HDA2 with ADAS Driving ECU
@@ -121,8 +122,6 @@ class CarInterface(CarInterfaceBase):
 
     if candidate == CAR.KIA_OPTIMA_G4_FL:
       ret.steerActuatorDelay = 0.2
-    elif candidate == CAR.KIA_CARNIVAL_HEV_4TH_GEN:
-      ret.steerActuatorDelay = 0.35
 
     # Dashcam cars are missing a test route, or otherwise need validation
     # TODO: Optima Hybrid 2017 uses a different SCC12 checksum
