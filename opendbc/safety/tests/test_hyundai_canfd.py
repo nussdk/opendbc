@@ -112,7 +112,7 @@ class TestHyundaiCanfdHDA1Base(TestHyundaiCanfdBase):
 
   TX_MSGS = [[0x12A, 0], [0x1A0, 1], [0x1CF, 2], [0x1E0, 0]]
   RELAY_MALFUNCTION_ADDRS = {0: (0x12A,)}  # LFA
-  FWD_BLACKLISTED_ADDRS = {2: [0x12A, 0x1E0, 0x161, 0x162]}
+  FWD_BLACKLISTED_ADDRS = {2: [0x12A, 0x1E0]}
   FWD_BUS_LOOKUP = {0: 2, 2: 0}
 
   STEER_MSG = "LFA"
@@ -179,7 +179,7 @@ class TestHyundaiCanfdHDA2EVBase(TestHyundaiCanfdBase):
 class TestHyundaiCanfdHDA2EV(TestHyundaiCanfdHDA2EVBase):
   TX_MSGS = [[0x50, 0], [0x1CF, 1], [0x2A4, 0]]
   RELAY_MALFUNCTION_ADDRS = {0: (0x50,)}
-  FWD_BLACKLISTED_ADDRS = {2: [0x50, 0x2a4]}
+  FWD_BLACKLISTED_ADDRS = {2: [0x50, 0x2a4, 0x161, 0x162]}
   STEER_MSG = "LKAS"
   SAFETY_PARAM = HyundaiSafetyFlags.FLAG_HYUNDAI_CANFD_HDA2 | HyundaiSafetyFlags.FLAG_HYUNDAI_EV_GAS
   BUTTONS_TX_BUS = 1
@@ -188,7 +188,7 @@ class TestHyundaiCanfdHDA2EV(TestHyundaiCanfdHDA2EVBase):
 class TestHyundaiCanfdHDA2EVAltSteering(TestHyundaiCanfdHDA2EVBase):
   TX_MSGS = [[0x110, 0], [0x1CF, 1], [0x362, 0]]
   RELAY_MALFUNCTION_ADDRS = {0: (0x110,)}
-  FWD_BLACKLISTED_ADDRS = {2: [0x110, 0x362]}
+  FWD_BLACKLISTED_ADDRS = {2: [0x110, 0x362, 0x161, 0x162]}
   STEER_MSG = "LKAS_ALT"
   SAFETY_PARAM = (HyundaiSafetyFlags.FLAG_HYUNDAI_CANFD_HDA2 |
                   HyundaiSafetyFlags.FLAG_HYUNDAI_EV_GAS |
@@ -265,7 +265,7 @@ class TestHyundaiCanfdHDA2LongEVAltSteering(HyundaiLongitudinalBase, TestHyundai
 ])
 class TestHyundaiCanfdHDA1Long(HyundaiLongitudinalBase, TestHyundaiCanfdHDA1Base):
 
-  FWD_BLACKLISTED_ADDRS = {2: [0x12a, 0x1e0, 0x1a0, 0x161, 0x162]}
+  FWD_BLACKLISTED_ADDRS = {2: [0x12a, 0x1e0, 0x1a0]}
 
   RELAY_MALFUNCTION_ADDRS = {0: (0x12A, 0x1a0)}  # LFA, SCC_CONTROL
 
