@@ -220,7 +220,7 @@ static int hyundai_canfd_fwd_hook(int bus_num, int addr) {
 
     // HUD icons
     bool is_lfahda_msg = ((addr == 0x1e0) && !hyundai_canfd_hda2);
-    bool is_ccnc_msg = (((addr == 0x161) || (addr == 0x162)) && !hyundai_canfd_hda2);
+    bool is_ccnc_msg = (((addr == 0x161) || (addr == 0x162)) && hyundai_canfd_hda2);
 
     // CRUISE_INFO for non-HDA2, we send our own longitudinal commands
     bool is_scc_msg = ((addr == 0x1a0) && hyundai_longitudinal && !hyundai_canfd_hda2);
