@@ -238,9 +238,13 @@ class CarState(CarStateBase):
       ret.leftBlindspot = cp.vl["BLINDSPOTS_REAR_CORNERS"]["FL_INDICATOR"] != 0
       ret.rightBlindspot = cp.vl["BLINDSPOTS_REAR_CORNERS"]["FR_INDICATOR"] != 0
 
-    if self.CP.flags & HyundaiFlags.CCNC and not self.CP.flags & HyundaiFlags.CANFD_HDA2:
-      self.msg_161 = copy.copy(cp_cam.vl["MSG_161"])
-      self.msg_162 = copy.copy(cp_cam.vl["MSG_162"])
+    if self.CP.flags & HyundaiFlags.CCNC:
+      if self.CP.flags & HyundaiFlags.CANFD_HDA2:
+        self.msg_161 = copy.copy(cp.vl["MSG_161"])
+        self.msg_162 = copy.copy(cp.vl["MSG_162"])
+      else:
+        self.msg_161 = copy.copy(cp_cam.vl["MSG_161"])
+        self.msg_162 = copy.copy(cp_cam.vl["MSG_162"])
 
     # cruise state
     # CAN FD cars enable on main button press, set available if no TCS faults preventing engagement
@@ -309,6 +313,12 @@ class CarState(CarStateBase):
     if CP.enableBsm:
       pt_messages += [
         ("BLINDSPOTS_REAR_CORNERS", 20),
+      ]
+
+    if CP.flags & HyundaiFlags.CCNC and CP.flags & HyundaiFlags.CANFD_HDA2:
+      pt_messages += [
+        ("MSG_161", 20),
+        ("MSG_162", 20),
       ]
 
     if not (CP.flags & HyundaiFlags.CANFD_CAMERA_SCC.value) and not CP.openpilotLongitudinalControl:

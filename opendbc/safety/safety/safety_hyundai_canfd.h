@@ -220,7 +220,7 @@ static int hyundai_canfd_fwd_hook(int bus_num, int addr) {
 
     // HUD icons
     bool is_lfahda_msg = ((addr == 0x1e0) && !hyundai_canfd_hda2);
-    bool is_ccnc_msg = (((addr == 0x161) || (addr == 0x162)) && hyundai_canfd_hda2);
+    bool is_ccnc_msg = (((addr == 0x161) || (addr == 0x162)) && hyundai_ccnc);
 
     // CRUISE_INFO for non-HDA2, we send our own longitudinal commands
     bool is_scc_msg = ((addr == 0x1a0) && hyundai_longitudinal && !hyundai_canfd_hda2);
@@ -245,6 +245,8 @@ static safety_config hyundai_canfd_init(uint16_t param) {
     // TODO: Include this iff CANFD_ALT_BUTTONS
     {0x1AA, 1, 16}, // CRUISE_BUTTONS_ALT
     {0x2A4, 0, 24}, // CAM_0x2A4
+    {0x161, 1, 32}, // MSG_161 (CCNC)
+    {0x162, 1, 32}, // MSG_162 (CCNC)
   };
 
   static const CanMsg HYUNDAI_CANFD_HDA2_ALT_STEERING_TX_MSGS[] = {
@@ -255,6 +257,8 @@ static safety_config hyundai_canfd_init(uint16_t param) {
     // Needed for cruise control in case of ALT_BUTTONS.
     {0x1A0, 1, 32}, // CRUISE_INFO
     {0x362, 0, 32}, // CAM_0x362
+    {0x161, 1, 32}, // MSG_161 (CCNC)
+    {0x162, 1, 32}, // MSG_162 (CCNC)
   };
 
   static const CanMsg HYUNDAI_CANFD_HDA2_LONG_TX_MSGS[] = {
