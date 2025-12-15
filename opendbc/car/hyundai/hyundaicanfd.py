@@ -119,16 +119,10 @@ def create_acc_cancel(packer, CP, CAN, cruise_info_copy):
   return packer.make_can_msg("SCC_CONTROL", CAN.ECAN, values)
 
 def create_lfahda_cluster(packer, CAN, CP, enabled):
-  if CP.flags & HyundaiFlags.CCNC:
-    values = {
-      "NEW_SIGNAL_5": 1,
-      "LFA_ICON": 2 if enabled else 0,
-    }
-  else:
-    values = {
-      "HDA_ICON": 1 if enabled else 0,
-      "LFA_ICON": 2 if enabled else 0,
-    }
+  values = {
+    "HDA_ICON": 1 if enabled else 0,
+    "LFA_ICON": 2 if enabled else 0,
+  }
   return packer.make_can_msg("LFAHDA_CLUSTER", CAN.ECAN, values)
 
 
@@ -196,7 +190,7 @@ def create_adrv_messages(packer, CAN, frame):
   if frame % 2 == 0:
     values = {
       'AEB_SETTING': 0x1,  # show AEB disabled icon
-      #'SET_ME_2': 0x2,
+      'SET_ME_2': 0x2,
       'SET_ME_FF': 0xff,
       'SET_ME_FC': 0xfc,
       'SET_ME_9': 0x1,

@@ -68,6 +68,8 @@ class CarInterface(CarInterfaceBase):
         ret.safetyConfigs[-1].safetyParam |= HyundaiSafetyFlags.FLAG_HYUNDAI_CANFD_ALT_BUTTONS.value
       if ret.flags & HyundaiFlags.CANFD_CAMERA_SCC:
         ret.safetyConfigs[-1].safetyParam |= HyundaiSafetyFlags.FLAG_HYUNDAI_CAMERA_SCC.value
+      if ret.flags & HyundaiFlags.CCNC:
+        ret.safetyConfigs[-1].safetyParam |= HyundaiSafetyFlags.FLAG_HYUNDAI_CCNC.value
 
     else:
       # Shared configuration for non CAN-FD cars
@@ -135,8 +137,10 @@ class CarInterface(CarInterfaceBase):
       addr, bus = 0x7d0, 0
       if CP.flags & HyundaiFlags.CANFD_HDA2.value:
         addr, bus = 0x730, CanBus(CP).ECAN
-      disable_ecu(can_recv, can_send, bus=bus, addr=addr, com_cont_req=b'\x28\x83\x01')
-
+      # HDA2: use ENABLE_RX_DISABLE_TX (0x81) to allow ADAS ECU to still relay BSM messages
+      # Non-HDA2: use DISABLE_RX_DISABLE_TX (0x83) for full disable
+      com_cont_req = b'\x28\x81\x01' if CP.flags & HyundaiFlags.CANFD_HDA2.value else b'\x28\x83\x01'
+      disable_ecu(can_recv, can_send, bus=bus, addr=addr, com_cont_req=com_cont_req)
     # for blinkers
     if CP.flags & HyundaiFlags.ENABLE_BLINKERS:
       disable_ecu(can_recv, can_send, bus=CanBus(CP).ECAN, addr=0x7B1, com_cont_req=b'\x28\x83\x01')

@@ -238,7 +238,7 @@ class CarState(CarStateBase):
       ret.leftBlindspot = cp.vl["BLINDSPOTS_REAR_CORNERS"]["FL_INDICATOR"] != 0
       ret.rightBlindspot = cp.vl["BLINDSPOTS_REAR_CORNERS"]["FR_INDICATOR"] != 0
 
-    if self.CP.flags & HyundaiFlags.CCNC and not self.CP.flags & HyundaiFlags.CANFD_HDA2:
+    if self.CP.flags & HyundaiFlags.CCNC and HyundaiFlags.CANFD_HDA2:
       self.msg_161 = copy.copy(cp_cam.vl["MSG_161"])
       self.msg_162 = copy.copy(cp_cam.vl["MSG_162"])
 
@@ -325,7 +325,7 @@ class CarState(CarStateBase):
         ("SCC_CONTROL", 50),
       ]
 
-    if CP.flags & HyundaiFlags.CCNC and not CP.flags & HyundaiFlags.CANFD_HDA2:
+    if CP.flags & HyundaiFlags.CCNC and HyundaiFlags.CANFD_HDA2:
       cam_messages += [
         ("MSG_161", 20),
         ("MSG_162", 20),
