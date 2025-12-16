@@ -117,8 +117,10 @@ class CarController(CarControllerBase):
       # LFA and HDA icons
       if self.frame % 5 == 0 and (not hda2 or hda2_long):
         can_sends.append(hyundaicanfd.create_lfahda_cluster(self.packer, self.CAN, self.CP, CC.enabled))
-        if self.CP.flags & HyundaiFlags.CCNC:
-          can_sends.extend(hyundaicanfd.create_ccnc(self.packer, self.CAN, self.CP, CC, CS))
+
+      # CCNC - generate for all cars with CCNC flag to suppress stock alerts
+      if self.frame % 5 == 0 and self.CP.flags & HyundaiFlags.CCNC:
+        can_sends.extend(hyundaicanfd.create_ccnc(self.packer, self.CAN, self.CP, CC, CS))
 
       # blinkers
       if hda2 and self.CP.flags & HyundaiFlags.ENABLE_BLINKERS:
